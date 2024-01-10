@@ -1,0 +1,8 @@
+print"<pre>";
+    print_r($row);
+
+    else{
+        echo "<script>
+         alert('password incorrect');
+       </script>";
+      }
