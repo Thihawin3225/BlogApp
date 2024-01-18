@@ -73,7 +73,6 @@ session_start();
     <label for="file" class="form-label">File</label>
     <input type="file" class="form-control" id="file" name="file" accept=".jpg, .jpeg, .png, .gif" required>
   </div>
-
   <div class="mb-3">
     <label for="created_at" class="form-label">Date</label>
     <input type="date" id="created_at" name="created_at" class="form-control" required>

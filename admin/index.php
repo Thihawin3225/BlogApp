@@ -6,6 +6,8 @@ if(empty($_SESSION['user-id']) || empty($_SESSION['logintime'])){
   header('Location: login.php');
 }
 
+
+
 ?>
 <!DOCTYPE html>
 <!--
@@ -75,6 +77,13 @@ scratch. This page gets rid of all links and provides the needed markup only.
       </span>
     </a>
     <!-- Sidebar -->
+    <?php
+    $sql = "Select * from user where id=".$_SESSION['user-id'];
+    $pst = $pdo->prepare($sql);
+    $pst->execute();
+    $result = $pst->fetchAll();
+
+    ?>
     <div class="sidebar">
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
@@ -82,7 +91,9 @@ scratch. This page gets rid of all links and provides the needed markup only.
           <img src="../dist/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">User Name</a>
+          <a href="#" class="d-block">
+            <?php echo $result[0]['name'] ?>
+          </a>
         </div>
       </div>
       <nav class="mt-2">

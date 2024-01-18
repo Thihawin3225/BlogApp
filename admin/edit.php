@@ -1,5 +1,30 @@
 <?php
     require '../config/config.php';
+    if($_POST){
+      $tilte = $_POST['title'];
+      $desc =  $_POST['desc'];
+      $created_at =  $_POST['created_at'];
+
+       if($_FILES){
+        $imageName = 'images/'.$_FILES['file']['name'];
+        $imagePath = pathinfo($imageName,PATHINFO_EXTENSION);
+        if($imagePath == 'jpg' || $imagePath == 'png'){
+          move_uploaded_file($_FILES['file']['tmp_name'],$imageName);
+          $sql = "update post set title ='$tilte',description='$desc',image='$imageName',updated_at='$created_at' WHERE id=".$_GET['id'];
+          $stmt = $pdo->prepare($sql);
+          $stmt->execute();
+      }else{
+        echo "<script>
+        alert('image must be png and jpg');
+      </script>";
+      }
+       }else{
+        echo "<script>
+        alert('Erro');
+      </script>";
+       }
+   
+       }
 ?>
 
 <!DOCTYPE html>
@@ -65,7 +90,7 @@
   </div>
 
   <div class="mb-3">
-    <button type="submit" class="btn btn-primary btn-block">Add</button>
+    <button type="submit" class="btn btn-primary btn-block">Update</button>
   </div>
 
   <div class="mb-3 text-center">
